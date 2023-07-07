@@ -18,6 +18,7 @@ export class App extends Component {
       },
     ],
     name: '',
+    number: '',
   };
 
   addContact = e => {
@@ -39,13 +40,14 @@ export class App extends Component {
   resetForm() {
     this.setState({
       name: '',
+      number: '',
     });
   }
 
   hangleChange = e => {
-    const { value } = e.currentTarget;
+    const { name, value } = e.currentTarget;
     this.setState({
-      name: value,
+      [name]: value,
     });
   };
 
@@ -65,6 +67,17 @@ export class App extends Component {
               value={name}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+            />
+          </label>
+          <label className={styles.label}>
+            <input
+              className={styles.input}
+              onChange={this.hangleChange}
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
             />
           </label>
