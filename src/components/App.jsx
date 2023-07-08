@@ -10,11 +10,13 @@ export class App extends Component {
       {
         id: nanoid(),
         name: 'Rosi',
+        number: 111 - 11 - 11,
       },
 
       {
         id: nanoid(),
         name: 'Eden',
+        number: 222 - 22 - 22,
       },
     ],
     name: '',
@@ -24,10 +26,11 @@ export class App extends Component {
   addContact = e => {
     e.preventDefault();
 
-    const { name } = this.state;
+    const { name, number } = this.state;
     const newContact = {
       id: nanoid(),
       name,
+      number,
     };
 
     this.setState(({ contacts }) => ({
@@ -52,7 +55,7 @@ export class App extends Component {
   };
 
   render() {
-    const { contacts, name } = this.state;
+    const { contacts, name, number } = this.state;
     return (
       <div className={styles.phonebook}>
         <h2>Phonebook</h2>
@@ -76,6 +79,7 @@ export class App extends Component {
               onChange={this.hangleChange}
               type="tel"
               name="number"
+              value={number}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
@@ -88,8 +92,10 @@ export class App extends Component {
         </form>
         <h2>Contacts</h2>
         <ul>
-          {contacts.map(({ id, name }) => (
-            <li key={id}>{name}</li>
+          {contacts.map(({ id, name, number }) => (
+            <li key={id}>
+              {name}: {number}
+            </li>
           ))}
         </ul>
       </div>
