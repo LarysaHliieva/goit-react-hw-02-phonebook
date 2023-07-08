@@ -21,6 +21,7 @@ export class App extends Component {
     ],
     name: '',
     number: '',
+    filter: '',
   };
 
   addContact = e => {
@@ -44,6 +45,7 @@ export class App extends Component {
     this.setState({
       name: '',
       number: '',
+      filter: '',
     });
   }
 
@@ -55,7 +57,16 @@ export class App extends Component {
   };
 
   render() {
-    const { contacts, name, number } = this.state;
+    const { contacts, name, number, filter } = this.state;
+
+    const normalizedFilter = filter.toLowerCase();
+
+    const filteredContacts = contacts.filter(
+      item =>
+        item.name.toLowerCase().includes(normalizedFilter) ||
+        String(item.number).toLowerCase().includes(normalizedFilter)
+    );
+
     return (
       <div className={styles.phonebook}>
         <h2>Phonebook</h2>
@@ -91,8 +102,18 @@ export class App extends Component {
           </button>
         </form>
         <h2>Contacts</h2>
+        <label className={styles.label}>
+          Find contacts by name
+          <input
+            className={styles.input}
+            onChange={this.hangleChange}
+            type="text"
+            name="filter"
+            value={filter}
+          />
+        </label>
         <ul>
-          {contacts.map(({ id, name, number }) => (
+          {filteredContacts.map(({ id, name, number }) => (
             <li key={id}>
               {name}: {number}
             </li>
