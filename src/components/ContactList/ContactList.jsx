@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import Button from 'components/Button/Button';
+
 import styles from './ContactList.module.css';
 
 const ContactList = ({ items, onDelete }) => {
@@ -8,13 +10,12 @@ const ContactList = ({ items, onDelete }) => {
       {items.map(({ id, name, number }) => (
         <li key={id} className={styles.contact}>
           {name}: {number}
-          <button
-            onClick={() => onDelete(id)}
+          <Button
+            text="Delete"
             type="button"
-            className={styles.btn}
-          >
-            delete
-          </button>
+            onClick={() => onDelete(id)}
+            className={styles.contact__btn}
+          />
         </li>
       ))}
     </ul>

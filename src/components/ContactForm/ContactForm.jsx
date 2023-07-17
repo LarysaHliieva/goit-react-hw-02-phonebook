@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import Button from 'components/Button/Button';
+
 import styles from './ContactForm.module.css';
 
 class ContactForm extends Component {
@@ -51,6 +53,7 @@ class ContactForm extends Component {
           />
         </label>
         <label className={styles.label}>
+          Number
           <input
             className={styles.input}
             onChange={this.hangleChange}
@@ -63,9 +66,7 @@ class ContactForm extends Component {
           />
         </label>
 
-        <button type="submit" className={styles.btn}>
-          Add contact
-        </button>
+        <Button text="Add contact" />
       </form>
     );
   }
