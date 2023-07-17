@@ -20,6 +20,11 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    if (this.isDublicate(name)) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     const newContact = {
       id: nanoid(),
       name,
@@ -30,6 +35,16 @@ export class App extends Component {
       contacts: [newContact, ...contacts],
     }));
   };
+
+  isDublicate(name) {
+    const normalizedName = name
+      .toLowerCase()
+      .split(' ')
+      .filter(item => item)
+      .join(' ');
+    const { contacts } = this.state;
+    return contacts.some(item => normalizedName === item.name.toLowerCase());
+  }
 
   hangleFilter = e => {
     const { value } = e.currentTarget;
