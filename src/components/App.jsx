@@ -46,6 +46,15 @@ export class App extends Component {
     return contacts.some(item => normalizedName === item.name.toLowerCase());
   }
 
+  deleteContact = id => {
+    this.setState(prevState => {
+      const resultList = prevState.contacts.filter(item => item.id !== id);
+      return {
+        contacts: resultList,
+      };
+    });
+  };
+
   hangleFilter = e => {
     const { value } = e.currentTarget;
     this.setState({
@@ -79,7 +88,7 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter hangleFilter={this.hangleFilter} />
-        <ContactList items={filteredContacts} />
+        <ContactList items={filteredContacts} onDelete={this.deleteContact} />
       </div>
     );
   }
